@@ -1,13 +1,11 @@
-
 import { Outlet } from "react-router-dom";
-import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 
 const HomeLayout = () => {
   return (
     <>
-      <header>
+      <header className="mb-12">
         <Header></Header>
       </header>
 
@@ -18,10 +16,6 @@ const HomeLayout = () => {
       <main>
         <Outlet></Outlet>
       </main>
-
-      <footer>
-        <Footer></Footer>
-      </footer>
     </>
   );
 };
