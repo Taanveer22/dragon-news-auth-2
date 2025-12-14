@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import LatestNews from "../components/LatestNews";
@@ -21,7 +20,7 @@ const HomeLayout = () => {
         <Nav></Nav>
       </nav>
 
-      <main className="mb-6 w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-12 gap-4">
+      <main className="mb-6 w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-12 gap-6">
         <aside className="col-span-3">
           <LeftSide></LeftSide>
         </aside>
