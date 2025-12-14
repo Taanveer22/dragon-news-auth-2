@@ -2,8 +2,8 @@ import Header from "../components/Header";
 import Nav from "../components/Nav";
 import LatestNews from "../components/LatestNews";
 import LeftSide from "../components/LeftSide";
-import CenterContent from "../components/CenterContent";
 import RightSide from "../components/RightSide";
+import { Outlet } from "react-router-dom";
 
 const HomeLayout = () => {
   return (
@@ -25,7 +25,7 @@ const HomeLayout = () => {
           <LeftSide></LeftSide>
         </aside>
         <section className="col-span-6">
-          <CenterContent></CenterContent>
+          <Outlet></Outlet>
         </section>
         <aside className="col-span-3">
           <RightSide></RightSide>

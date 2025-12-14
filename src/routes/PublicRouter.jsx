@@ -1,6 +1,6 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
-import Home from "../components/Home";
+import CenterContent from "../components/CenterContent";
 
 const PublicRouter = createBrowserRouter([
   {
@@ -9,11 +9,18 @@ const PublicRouter = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home></Home>,
+        element: <Navigate to={"category/01"}></Navigate>,
+      },
+      {
+        path: "category/:id",
+        element: <CenterContent></CenterContent>,
+        loader: ({ params }) =>
+          fetch(
+            `https://openapi.programming-hero.com/api/news/category/${params.id}`
+          ),
       },
     ],
   },
-
 ]);
 
 export default PublicRouter;
