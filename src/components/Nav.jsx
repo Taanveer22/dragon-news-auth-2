@@ -1,5 +1,28 @@
+import { NavLink } from "react-router-dom";
+import user from "../assets/user.png";
 const Nav = () => {
-  return <div>Nav</div>;
+  return (
+    <div className="flex justify-between items-center">
+      <div className="">...</div>
+      <div>
+        <ul className="flex gap-3 opacity-70">
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/about">About</NavLink>
+          </li>
+          <li>
+            <NavLink to="/career">Career</NavLink>
+          </li>
+        </ul>
+      </div>
+      <div className="flex gap-3">
+        <img src={user} className="w-10" />
+        <button className="btn btn-neutral rounded-none">Login</button>
+      </div>
+    </div>
+  );
 };
 
 export default Nav;
