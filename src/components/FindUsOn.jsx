@@ -7,7 +7,7 @@ const FindUsOn = () => {
   return (
     <div>
       <h1 className="text-xl font-medium mb-4">Find Us On</h1>
-      <div className="join flex gap-4 join-vertical">
+      <div className="join flex join-vertical">
         <button className="btn join-item justify-start">
           <img src={fb} />
           Facebook
