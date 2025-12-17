@@ -1,12 +1,27 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Login = () => {
+  const { logInUser, setUser } = useContext(AuthContext);
+
   const handleLoginForm = (e) => {
+    
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
     console.log(email, password);
+
+    // ====== firebase function =====
+    logInUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        setUser(result.user);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
