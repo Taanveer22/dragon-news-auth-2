@@ -6,6 +6,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import ErrorPage from "../components/ErrorPage";
 import CardDetail from "../components/CardDetail";
+import PrivateRouter from "./PrivateRouter";
 
 const PublicRouter = createBrowserRouter([
   {
@@ -29,7 +30,11 @@ const PublicRouter = createBrowserRouter([
   },
   {
     path: "/newsDetail/:id",
-    element: <CardDetail></CardDetail>,
+    element: (
+      <PrivateRouter>
+        <CardDetail></CardDetail>
+      </PrivateRouter>
+    ),
     loader: ({ params }) =>
       fetch(`https://openapi.programming-hero.com/api/news/${params.id}`),
   },
