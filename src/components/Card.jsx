@@ -2,7 +2,7 @@ import { FaStar, FaRegEye, FaBookmark, FaShareAlt } from "react-icons/fa";
 import moment from "moment";
 
 const Card = ({ newsElement }) => {
-  console.log(newsElement);
+  // console.log(newsElement);
   return (
     <div>
       <div className="card bg-base-100 shadow-xl border border-base-300">

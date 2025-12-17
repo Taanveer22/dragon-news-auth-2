@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+
 const Register = () => {
-  
+  const { createNewUser, setUser } = useContext(AuthContext);
+
   const handleRegisterForm = (e) => {
     e.preventDefault();
 
@@ -10,6 +14,16 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(name, photo, email, password);
+
+    // ==== firebase functions====
+    createNewUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        setUser(result.user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
