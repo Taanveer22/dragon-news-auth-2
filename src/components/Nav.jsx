@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import user from "../assets/user.png";
+
 const Nav = () => {
   return (
     <div className="flex justify-between items-center">
@@ -19,7 +20,9 @@ const Nav = () => {
       </div>
       <div className="flex gap-3">
         <img src={user} className="w-10" />
-        <button className="btn btn-neutral rounded-none">Login</button>
+        <Link to={"/auth/login"} className="btn btn-neutral rounded-none">
+          Login
+        </Link>
       </div>
     </div>
   );
