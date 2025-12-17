@@ -5,7 +5,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const CardDetail = () => {
   const loaderData = useLoaderData();
-  console.log(loaderData.data[0]);
+  // console.log(loaderData.data[0]);
   const detailData = loaderData.data[0];
   // console.log(detailData);
 
