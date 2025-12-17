@@ -1,10 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
-import user from "../assets/user.png";
+import userIcon from "../assets/user.png";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Nav = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="flex justify-between items-center">
-      <div className="">...</div>
+      <div className="">{user.name}</div>
       <div>
         <ul className="flex gap-3 opacity-70">
           <li>
@@ -19,7 +22,7 @@ const Nav = () => {
         </ul>
       </div>
       <div className="flex gap-3">
-        <img src={user} className="w-10" />
+        <img src={userIcon} className="w-10" />
         <Link to={"/auth/login"} className="btn btn-neutral rounded-none">
           Login
         </Link>
