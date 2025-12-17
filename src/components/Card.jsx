@@ -1,5 +1,6 @@
 import { FaStar, FaRegEye, FaBookmark, FaShareAlt } from "react-icons/fa";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 const Card = ({ newsElement }) => {
   // console.log(newsElement);
@@ -46,9 +47,12 @@ const Card = ({ newsElement }) => {
             {newsElement?.details.slice(0, 200)}.....
           </p>
 
-          <span className="text-primary font-semibold cursor-pointer">
+          <Link
+            to={`/newsDetail/${newsElement._id}`}
+            className="text-primary font-semibold cursor-pointer"
+          >
             Read More
-          </span>
+          </Link>
 
           {/* Footer */}
           <div className="flex items-center justify-between mt-4">
