@@ -3,8 +3,8 @@ import Card from "./Card";
 
 const CenterContent = () => {
   const loaderData = useLoaderData();
-  console.log(loaderData);
-  console.log(loaderData.data);
+  // console.log(loaderData);
+  // console.log(loaderData.data);
 
   return (
     <div>
