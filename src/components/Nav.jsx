@@ -17,7 +17,7 @@ const Nav = () => {
   };
   return (
     <div className="flex justify-between items-center">
-      <div className="">{user?.email}</div>
+      <div>{user?.email}</div>
       <div>
         <ul className="flex gap-3 opacity-70">
           <li>
@@ -33,7 +33,7 @@ const Nav = () => {
       </div>
       <div className="flex gap-3 items-center">
         <div>
-          {user && user?.email ? (
+          {user && user?.displayName ? (
             <p className="text-sm font-medium">{user.displayName}</p>
           ) : (
             <p className="text-sm font-medium">No User</p>
@@ -41,7 +41,7 @@ const Nav = () => {
         </div>
 
         <div>
-          {user && user?.email ? (
+          {user && user?.displayName ? (
             <img src={user.photoURL} className="w-10 rounded-full" />
           ) : (
             <img src={userIcon} className="w-10" />
@@ -49,7 +49,7 @@ const Nav = () => {
         </div>
 
         <div>
-          {user && user?.email ? (
+          {user && user?.displayName ? (
             <button
               onClick={handleLogOut}
               className="btn btn-neutral rounded-none"
