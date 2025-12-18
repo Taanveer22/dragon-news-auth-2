@@ -9,10 +9,10 @@ const Nav = () => {
   const handleLogOut = () => {
     logOutUser()
       .then(() => {
-        console.log("log out successful");
+        alert("log out successful");
       })
       .catch((error) => {
-        console.log(error.message);
+        alert(error.message);
       });
   };
   return (

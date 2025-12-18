@@ -15,17 +15,17 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    console.log(email, password);
+    // console.log(email, password);
 
     // ====== firebase function =====
     logInUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         setUser(result.user);
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
         setErrorMessage(error.message);
       });
   };

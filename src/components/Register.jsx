@@ -16,7 +16,7 @@ const Register = () => {
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(name, photo, email, password);
+    // console.log(name, photo, email, password);
 
     // ==== input field validation
     if (name.length < 4) {
@@ -37,7 +37,7 @@ const Register = () => {
     // ==== firebase functions====
     createNewUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         setUser(result.user);
         // ==== profile update====
         updateProfileForUser({ displayName: name, photoURL: photo })
@@ -45,11 +45,11 @@ const Register = () => {
             navigate("/");
           })
           .catch((error) => {
-            console.log(error.message);
+            alert(error.message);
           });
       })
       .catch((error) => {
-        console.log(error.message);
+        alert(error.message);
       });
   };
   return (
