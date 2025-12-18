@@ -31,21 +31,37 @@ const Nav = () => {
           </li>
         </ul>
       </div>
-      <div className="flex gap-3">
-        <img src={userIcon} className="w-10" />
+      <div className="flex gap-3 items-center">
+        <div>
+          {user && user?.email ? (
+            <p className="text-sm font-medium">{user.displayName}</p>
+          ) : (
+            <p className="text-sm font-medium">No User</p>
+          )}
+        </div>
 
-        {user && user?.email ? (
-          <button
-            onClick={handleLogOut}
-            className="btn btn-neutral rounded-none"
-          >
-            Logout
-          </button>
-        ) : (
-          <Link to={"/auth/login"} className="btn btn-neutral rounded-none">
-            Login
-          </Link>
-        )}
+        <div>
+          {user && user?.email ? (
+            <img src={user.photoURL} className="w-10 rounded-full" />
+          ) : (
+            <img src={userIcon} className="w-10" />
+          )}
+        </div>
+
+        <div>
+          {user && user?.email ? (
+            <button
+              onClick={handleLogOut}
+              className="btn btn-neutral rounded-none"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link to={"/auth/login"} className="btn btn-neutral rounded-none">
+              Login
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

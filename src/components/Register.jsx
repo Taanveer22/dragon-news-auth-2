@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Register = () => {
-  const { createNewUser, setUser } = useContext(AuthContext);
+  const { createNewUser, setUser, updateProfileForUser } =
+    useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState({});
+  const navigate = useNavigate();
 
   const handleRegisterForm = (e) => {
     e.preventDefault();
@@ -15,11 +18,35 @@ const Register = () => {
     const password = e.target.password.value;
     console.log(name, photo, email, password);
 
+    // ==== input field validation
+    if (name.length < 4) {
+      setErrorMessage({
+        ...errorMessage,
+        name: "name must be 4 characters long",
+      });
+      return;
+    }
+
+    if (password.length < 6) {
+      setErrorMessage({
+        ...errorMessage,
+        password: "password should be more than 6 characters",
+      });
+    }
+
     // ==== firebase functions====
     createNewUser(email, password)
       .then((result) => {
         console.log(result.user);
         setUser(result.user);
+        // ==== profile update====
+        updateProfileForUser({ displayName: name, photoURL: photo })
+          .then(() => {
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
       })
       .catch((error) => {
         console.log(error.message);
@@ -40,6 +67,9 @@ const Register = () => {
               className="input"
               placeholder="Name"
             />
+            {errorMessage.name && (
+              <p className="text-red-500 text-sm">{errorMessage.name}</p>
+            )}
             <label className="label">Photo</label>
             <input
               name="photo"
@@ -61,7 +91,9 @@ const Register = () => {
               className="input"
               placeholder="Password"
             />
-
+            {errorMessage.password && (
+              <p className="text-rose-500 text-sm">{errorMessage.password}</p>
+            )}
             <label className="label">
               <input type="checkbox" className="checkbox" />
               Accept Terms and Conditions
