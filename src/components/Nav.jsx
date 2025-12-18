@@ -16,7 +16,7 @@ const Nav = () => {
       });
   };
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex flex-col sm:flex-row gap-6 justify-between items-center">
       <div>{user?.email}</div>
       <div>
         <ul className="flex gap-3 opacity-70">
