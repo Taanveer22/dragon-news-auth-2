@@ -4,6 +4,7 @@ import LatestNews from "../components/LatestNews";
 import LeftSide from "../components/LeftSide";
 import RightSide from "../components/RightSide";
 import { Outlet } from "react-router-dom";
+import Privacy from "../components/Privacy";
 
 const HomeLayout = () => {
   return (
@@ -11,6 +12,10 @@ const HomeLayout = () => {
       <header className="mb-6">
         <Header></Header>
       </header>
+
+      <div className="mb-6">
+        <Privacy></Privacy>
+      </div>
 
       <article className="mb-6 w-11/12 mx-auto">
         <LatestNews></LatestNews>

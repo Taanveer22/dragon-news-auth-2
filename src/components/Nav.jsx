@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import userIcon from "../assets/user.png";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const Nav = () => {
   const { user, logOutUser } = useContext(AuthContext);
@@ -9,15 +10,15 @@ const Nav = () => {
   const handleLogOut = () => {
     logOutUser()
       .then(() => {
-        alert("log out successful");
+        toast.success("log out successful");
       })
-      .catch((error) => {
-        alert(error.message);
+      .catch(() => {
+        toast.error("log out failed");
       });
   };
   return (
     <div className="flex flex-col sm:flex-row gap-6 justify-between items-center">
-      <div>{user?.email}</div>
+      <div>{user ? user.displayName : "No User"}</div>
       <div>
         <ul className="flex gap-3 opacity-70">
           <li>
@@ -31,17 +32,9 @@ const Nav = () => {
           </li>
         </ul>
       </div>
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-2 items-center">
         <div>
-          {user && user?.displayName ? (
-            <p className="text-sm font-medium">{user.displayName}</p>
-          ) : (
-            <p className="text-sm font-medium">No User</p>
-          )}
-        </div>
-
-        <div>
-          {user && user?.displayName ? (
+          {user && user?.photoURL ? (
             <img src={user.photoURL} className="w-10 rounded-full" />
           ) : (
             <img src={userIcon} className="w-10" />
@@ -52,12 +45,15 @@ const Nav = () => {
           {user && user?.displayName ? (
             <button
               onClick={handleLogOut}
-              className="btn btn-neutral rounded-none"
+              className="btn btn-sm btn-error rounded-none"
             >
               Logout
             </button>
           ) : (
-            <Link to={"/auth/login"} className="btn btn-neutral rounded-none">
+            <Link
+              to={"/auth/login"}
+              className="btn btn-sm btn-success rounded-none"
+            >
               Login
             </Link>
           )}

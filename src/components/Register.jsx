@@ -1,11 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const Register = () => {
-  const { createNewUser, setUser, updateProfileForUser } =
-    useContext(AuthContext);
+  const { createNewUser, updateProfileForUser } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState({});
   const navigate = useNavigate();
 
@@ -17,6 +16,9 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     // console.log(name, photo, email, password);
+
+    // reset state
+    setErrorMessage("");
 
     // ==== input field validation
     if (name.length < 4) {
@@ -36,20 +38,20 @@ const Register = () => {
 
     // ==== firebase functions====
     createNewUser(email, password)
-      .then((result) => {
-        // console.log(result.user);
-        setUser(result.user);
+      .then(() => {
+        toast.success("Registration done");
         // ==== profile update====
         updateProfileForUser({ displayName: name, photoURL: photo })
           .then(() => {
+            toast.success("profile updated");
             navigate("/");
           })
-          .catch((error) => {
-            alert(error.message);
+          .catch(() => {
+            toast.error("profile not updated");
           });
       })
-      .catch((error) => {
-        alert(error.message);
+      .catch(() => {
+        toast.error("Registration failed");
       });
   };
   return (

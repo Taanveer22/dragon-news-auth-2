@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const { logInUser, setUser } = useContext(AuthContext);
+  const { logInUser } = useContext(AuthContext);
   const location = useLocation();
   // console.log(location);
   const navigate = useNavigate();
@@ -14,19 +15,19 @@ const Login = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-
     // console.log(email, password);
+
+    // reset state
+    setErrorMessage("");
 
     // ====== firebase function =====
     logInUser(email, password)
-      .then((result) => {
-        // console.log(result.user);
-        setUser(result.user);
+      .then(() => {
+        toast.success("login done");
         navigate(location?.state ? location.state : "/");
       })
-      .catch((error) => {
-        // console.log(error.message);
-        setErrorMessage(error.message);
+      .catch(() => {
+        setErrorMessage("login failed");
       });
   };
   return (
@@ -60,7 +61,7 @@ const Login = () => {
                 {errorMessasge}
               </p>
             )}
-            
+
             <button className="btn btn-neutral mt-4">Login</button>
           </fieldset>
         </form>
