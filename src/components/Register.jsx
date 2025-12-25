@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const Register = () => {
   const { createNewUser, updateProfileForUser } = useContext(AuthContext);
-  const [errorMessage, setErrorMessage] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleRegisterForm = (e) => {
@@ -22,18 +22,13 @@ const Register = () => {
 
     // ==== input field validation
     if (name.length < 4) {
-      setErrorMessage({
-        ...errorMessage,
-        name: "name must be 4 characters long",
-      });
+      setErrorMessage("name must be 4 characters long");
       return;
     }
 
     if (password.length < 6) {
-      setErrorMessage({
-        ...errorMessage,
-        password: "password should be more than 6 characters",
-      });
+      setErrorMessage("password should be more than 6 characters");
+      return;
     }
 
     // ==== firebase functions====
@@ -69,9 +64,6 @@ const Register = () => {
               className="input"
               placeholder="Name"
             />
-            {errorMessage.name && (
-              <p className="text-red-500 text-sm">{errorMessage.name}</p>
-            )}
             <label className="label">Photo</label>
             <input
               name="photo"
@@ -93,8 +85,8 @@ const Register = () => {
               className="input"
               placeholder="Password"
             />
-            {errorMessage.password && (
-              <p className="text-rose-500 text-sm">{errorMessage.password}</p>
+            {errorMessage && (
+              <p className="text-rose-500 text-sm">{errorMessage}</p>
             )}
             <label className="label">
               <input type="checkbox" className="checkbox" />

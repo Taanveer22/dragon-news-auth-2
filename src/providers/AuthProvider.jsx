@@ -34,7 +34,6 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateProfileForUser = (updatedUserData) => {
-    setLoading(true);
     return updateProfile(auth.currentUser, updatedUserData);
   };
 
@@ -54,7 +53,6 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     loading,
-    setUser,
     createNewUser,
     logInUser,
     logOutUser,
@@ -66,6 +64,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      // ✅ loading is set to false only after Firebase updates user state
       setLoading(false);
     });
 
@@ -74,7 +73,10 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  return <AuthContext value={authInfo}>{children}</AuthContext>;
+  // ✅ Ensure using Provider, not just AuthContext
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export { AuthContext };

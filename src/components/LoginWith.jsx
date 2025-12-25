@@ -2,27 +2,29 @@ import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const LoginWith = () => {
-  const { googleSignIn, githubSignIn, setUser } = useContext(AuthContext);
+  const { googleSignIn, githubSignIn } = useContext(AuthContext);
+
 
   const handleGoogleSignIn = () => {
     googleSignIn()
-      .then((result) => {
-        setUser(result.user);
+      .then(() => {
+        toast.success("google login done");
       })
-      .catch((error) => {
-        alert(error.message);
+      .catch(() => {
+        toast.error("google login failed");
       });
   };
 
   const handleGithubSignIn = () => {
     githubSignIn()
-      .then((result) => {
-        setUser(result.user);
+      .then(() => {
+        toast.success("github login done");
       })
-      .catch((error) => {
-        alert(error.message);
+      .catch(() => {
+        toast.error("github login failed");
       });
   };
 
@@ -35,7 +37,10 @@ const LoginWith = () => {
       >
         <FaGoogle></FaGoogle>Login with google
       </button>
-      <button onClick={handleGithubSignIn} className="btn btn-outline text-green-500">
+      <button
+        onClick={handleGithubSignIn}
+        className="btn btn-outline text-green-500"
+      >
         <FaGithub></FaGithub>Login with github
       </button>
     </div>

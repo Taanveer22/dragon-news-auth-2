@@ -5,11 +5,10 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const { logInUser } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
   // console.log(location);
   const navigate = useNavigate();
-  // console.log(navigate);
-  const [errorMessasge, setErrorMessage] = useState("");
 
   const handleLoginForm = (e) => {
     e.preventDefault();
@@ -40,6 +39,7 @@ const Login = () => {
           <fieldset className="fieldset">
             <label className="label">Email</label>
             <input
+              required
               name="email"
               type="email"
               className="input"
@@ -47,6 +47,7 @@ const Login = () => {
             />
             <label className="label">Password</label>
             <input
+              required
               name="password"
               type="password"
               className="input"
@@ -56,10 +57,8 @@ const Login = () => {
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
-            {errorMessasge && (
-              <p className="text-red-500 text-lg font-medium">
-                {errorMessasge}
-              </p>
+            {errorMessage && (
+              <p className="text-red-500 text-lg font-medium">{errorMessage}</p>
             )}
 
             <button className="btn btn-neutral mt-4">Login</button>
